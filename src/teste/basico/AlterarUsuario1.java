@@ -1,29 +1,33 @@
 package teste.basico;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import modelo.basico.Usuario;
 
-public class NovoUsuario {
+public class AlterarUsuario1 {
 
 	public static void main(String[] args) {
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exercicios_jpa");
 		EntityManager em = emf.createEntityManager();
 		
-		Usuario novoUsuario = new Usuario("Joaquim Nabuco", "nabuco@nabuco.com");
-		
 		em.getTransaction().begin();
-		em.persist(novoUsuario);
-		em.getTransaction().commit();
 		
-		System.out.println("O id gerado foi: " + novoUsuario.getId());
+		Usuario usuario = em.find(Usuario.class, 6L);
+		usuario.setNome("Carlos Larcerda");
+		usuario.setEmail("lacerda@lacerda.com");
+		
+		em.merge(usuario);
+		
+		em.getTransaction().commit();
 		
 		em.close();
 		emf.close();
-
 	}
 
 }
