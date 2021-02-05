@@ -6,24 +6,18 @@ import javax.persistence.Persistence;
 
 import modelo.basico.Usuario;
 
-public class NovoUsuario {
+public class ObterUsuario {
 
 	public static void main(String[] args) {
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exercicios_jpa");
 		EntityManager em = emf.createEntityManager();
 		
-		Usuario novoUsuario = new Usuario("Edmund Burk", "burk@burk.com");
-		
-		em.getTransaction().begin();
-		em.persist(novoUsuario);
-		em.getTransaction().commit();
-		
-		System.out.println("O id gerado foi: " + novoUsuario.getId());
+		Usuario usuario = em.find(Usuario.class, 3L);
+		System.out.println(usuario.getNome());
 		
 		em.close();
 		emf.close();
-
 	}
 
 }
