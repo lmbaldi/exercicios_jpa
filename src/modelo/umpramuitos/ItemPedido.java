@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 
 import modelo.basico.Produto;
 
+
 @Entity
 public class ItemPedido {
 	
